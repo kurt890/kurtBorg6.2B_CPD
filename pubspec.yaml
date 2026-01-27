@@ -9,16 +9,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+
   # State Management
   provider: ^6.1.1
-  
+
   # Local Storage
   shared_preferences: ^2.2.2
-  
+
   # Location
   geolocator: ^11.0.0
-  
+
   # UI Components
   cupertino_icons: ^1.0.6
 
@@ -29,13 +29,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  
-  # Assets folder (if you add images later)
-  # assets:
-  #   - assets/images/
-
-  # Fonts (optional)
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
