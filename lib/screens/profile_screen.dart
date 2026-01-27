@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../services/notification_service.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -180,6 +181,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   const SizedBox(height: 24),
+
+                  // GPS button
                   ElevatedButton.icon(
                     onPressed: _isLoading ? null : _getCurrentLocation,
                     icon: _isLoading
@@ -195,6 +198,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     label: Text(
                       _isLoading ? 'Getting Location...' : 'Get My Location',
                     ),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 32,
+                        vertical: 16,
+                      ),
+                      textStyle: const TextStyle(fontSize: 16),
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // Notification button (A&A4)
+                  ElevatedButton.icon(
+                    onPressed: () async {
+                      await NotificationService.showNow(
+                        title: 'CPD Task Manager',
+                        body: 'This is a local notification test ✅',
+                      );
+                    },
+                    icon: const Icon(Icons.notifications),
+                    label: const Text('Test Notification'),
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 32,
