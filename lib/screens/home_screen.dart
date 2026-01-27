@@ -10,6 +10,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  List<String> habits = List.generate(1, (index) => 'Habit ${index + 1}');
 
   void _onItemTapped(int index) {
     setState(() {
@@ -24,8 +25,20 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  // Performance Issue: Heavy computation in build method
+  int _expensiveCalculation() {
+    int result = 0;
+    for (int i = 0; i < 1000000; i++) {
+      result += i;
+    }
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Performance Issue: Running expensive calculation on every rebuild
+    _expensiveCalculation();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -49,14 +62,33 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
             ),
           ),
-          const Expanded(
-            child: SizedBox(),
+          Expanded(
+            // Performance Issue: Using ListView instead of ListView.builder
+            child: ListView(
+              children: habits.map((habit) {
+                return Card(
+                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: ListTile(
+                    leading: Checkbox(
+                      value: false,
+                      onChanged: (value) {
+                        setState(() {});
+                      },
+                    ),
+                    title: Text(habit),
+                    trailing: const Icon(Icons.more_vert),
+                  ),
+                );
+              }).toList(),
+            ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add habit action
+          setState(() {
+            habits.add('New Habit ${habits.length + 1}');
+          });
         },
         backgroundColor: Colors.grey[400],
         child: const Icon(Icons.add, color: Colors.black, size: 32),
