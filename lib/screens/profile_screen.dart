@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/notification_service.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+
+await FirebaseAnalytics.instance.logEvent(name: 'gps_button_tapped');
+
+await FirebaseAnalytics.instance.logEvent(name: 'test_notification_tapped');
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);

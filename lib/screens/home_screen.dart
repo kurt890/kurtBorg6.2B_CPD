@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'profile_screen.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+
+final _analytics = FirebaseAnalytics.instance;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
