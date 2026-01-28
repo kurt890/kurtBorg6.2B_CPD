@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'profile_screen.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-final _analytics = FirebaseAnalytics.instance;
+import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -70,7 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ListView(
               children: habits.map((habit) {
                 return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: ListTile(
                     leading: Checkbox(
                       value: false,
@@ -88,7 +88,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
+          // Analytics event for proof (R&U6)
+          await FirebaseAnalytics.instance.logEvent(
+            name: 'add_habit_tapped',
+            parameters: {'count_after': habits.length + 1},
+          );
+
           setState(() {
             habits.add('New Habit ${habits.length + 1}');
           });

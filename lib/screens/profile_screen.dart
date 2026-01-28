@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../services/notification_service.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-await FirebaseAnalytics.instance.logEvent(name: 'gps_button_tapped');
-
-await FirebaseAnalytics.instance.logEvent(name: 'test_notification_tapped');
+import '../services/notification_service.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -58,6 +55,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _getCurrentLocation() async {
+    // Analytics event for GPS button tap
+    await FirebaseAnalytics.instance.logEvent(name: 'gps_button_tapped');
+
     setState(() {
       _isLoading = true;
       _locationText = 'Getting location...';
@@ -217,9 +217,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // Notification button (A&A4)
                   ElevatedButton.icon(
                     onPressed: () async {
+                      // Analytics event for notification button tap
+                      await FirebaseAnalytics.instance
+                          .logEvent(name: 'test_notification_tapped');
+
                       await NotificationService.showNow(
                         title: 'CPD Task Manager',
-                        body: 'This is a local notification test ✅',
+                        body: 'This is a local notification test ',
                       );
                     },
                     icon: const Icon(Icons.notifications),
