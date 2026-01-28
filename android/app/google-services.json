@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "324552479247",
+    "project_id": "cpdhome-407e4",
+    "storage_bucket": "cpdhome-407e4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324552479247:android:701a8e18ab3f5ae41c497a",
+        "android_client_info": {
+          "package_name": "com.example.cpd_assignment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5YVifeYtDMNmnI3NzQWs6sKmiex7vvRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
